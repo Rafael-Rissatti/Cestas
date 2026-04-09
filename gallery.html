@@ -163,14 +163,8 @@ $(document).ready(function() {
   };
 
   // Função para obter parâmetros da URL
-  function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
-
-  const category = getUrlParameter('category');
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get('category');
   const galleryData = categoryImages[category];
 
   if (galleryData) {
