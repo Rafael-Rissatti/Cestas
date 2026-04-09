@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galeria de Cestas</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .gallery-thumbnail {
+      width: 150px; /* Largura fixa para miniaturas */
+      height: 150px; /* Altura fixa para miniaturas */
+      object-fit: cover; /* Garante que a imagem cubra a área sem distorção */
+      cursor: pointer;
+      border: 1px solid #ddd;
+      padding: 5px;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+    .gallery-thumbnail:hover {
+      transform: scale(1.05);
+    }
+    .gallery-container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+      display: block; /* Remove espaço extra abaixo da imagem */
+      margin: 0 auto; /* Centraliza a imagem no modal */
+    }
+    .category-title {
+      font-weight: bold;
+      font-family: 'Pacifico', cursive;
+      color: #5D3C28;
+      text-align: center;
+      font-size: 40px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    .back-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="back-button">
+    <a href="index.html" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Voltar para Categorias</a>
+  </div>
+  <h2 class="category-title" id="galleryTitle"></h2>
+
+  <div class="gallery-container" id="thumbnailContainer">
+    <!-- As miniaturas serão carregadas aqui pelo JavaScript -->
+  </div>
+
+  <!-- Modal para exibição da imagem grande -->
+  <div id="imageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="modalImageTitle"></h4>
+        </div>
+        <div class="modal-body text-center">
+          <img src="" id="largeImage" alt="Imagem Grande">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+  // Dados das imagens para cada categoria
+  // ATENÇÃO: Você precisará ter essas imagens nos seus diretórios ou ajustar os caminhos.
+  // Para fins de demonstração, algumas imagens são reutilizadas ou são placeholders.
+  const categoryImages = {
+    cafe_da_manha: {
+      title: "Galeria de Café da Manhã",
+      images: [
+        { src: "c1.jpeg", alt: "Cesta de Café da Manhã 1" },
+        { src: "c4.jpeg", alt: "Cesta de Café da Manhã 2" }, // Exemplo: crie c1_2.jpeg, c1_3.jpeg
+        { src: "c5.jpeg", alt: "Cesta de Café da Manhã 3" }
+      ]
+    },
+    chocolate: {
+      title: "Galeria de Chocolate",
+      images: [
+        { src: "c2.jpeg", alt: "Cesta de Chocolate 1" },
+        { src: "c6.jpeg", alt: "Cesta de Chocolate 2" },
+        { src: "c8.jpeg", alt: "Cesta de Chocolate 4" },
+        { src: "c7.jpeg", alt: "Cesta de Chocolate 5" }
+      ]
+    },
+    dia_das_maes: {
+      title: "Galeria de Dia das Mães",
+      images: [
+        { src: "c3.jpeg", alt: "Cesta Dia das Mães 1" },
+        { src: "c8.jpeg", alt: "Cesta Dia das Mães 2" },
+        { src: "c1.jpeg", alt: "Cesta Dia das Mães 3" },
+        { src: "c2.jpeg", alt: "Cesta Dia das Mães 4" },
+        { src: "c7.jpeg", alt: "Cesta Dia das Mães 5" },
+        { src: "c3.jpeg", alt: "Cesta Dia das Mães 6" },
+      ]
+    },
+    dia_dos_namorados: {
+      title: "Galeria de Dia dos Namorados",
+      images: [
+        { src: "c4.jpeg", alt: "Cesta Dia dos Namorados 1" },
+        { src: "c3.jpeg", alt: "Cesta Dia dos Namorados 2" }
+      ]
+    },
+    aniversario: {
+      title: "Galeria de Aniversário",
+      images: [
+        { src: "c1.jpeg", alt: "Cesta de Aniversário 1" },
+        { src: "c4.jpeg", alt: "Cesta de Aniversário 2" }
+      ]
+    },
+    queijo_e_vinho: {
+      title: "Galeria de Queijo e Vinho",
+      images: [
+        { src: "c1.jpeg", alt: "Cesta de Queijo e Vinho 1" },
+        { src: "c2.jpeg", alt: "Cesta de Queijo e Vinho 2" }
+      ]
+    },
+    frios: {
+      title: "Galeria de Frios",
+      images: [
+        { src: "c1.jpeg", alt: "Cesta de Frios 1" },
+        { src: "c8.jpeg", alt: "Cesta de Frios 2" }
+      ]
+    },
+    produtos_artesanais: {
+      title: "Galeria de Produtos Artesanais",
+      images: [
+        { src: "c8.jpeg", alt: "Cesta de Produtos Artesanais 1" },
+        { src: "c1.jpeg", alt: "Cesta de Produtos Artesanais 2" }
+      ]
+    }
+  };
+
+  // Função para obter parâmetros da URL
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
+
+  const category = getUrlParameter('category');
+  const galleryData = categoryImages[category];
+
+  if (galleryData) {
+    $('#galleryTitle').text(galleryData.title);
+    const $thumbnailContainer = $('#thumbnailContainer');
+
+    galleryData.images.forEach(function(image) {
+      const $img = $('<img>')
+        .attr('src', image.src)
+        .attr('alt', image.alt)
+        .addClass('img-responsive gallery-thumbnail')
+        .data('large-src', image.src) // Armazena a URL da imagem grande
+        .data('title', image.alt); // Armazena o título para o modal
+
+      $thumbnailContainer.append($img);
+    });
+
+    // Lida com o clique na miniatura para abrir o modal
+    $thumbnailContainer.on('click', '.gallery-thumbnail', function() {
+      const largeSrc = $(this).data('large-src');
+      const title = $(this).data('title');
+      $('#largeImage').attr('src', largeSrc);
+      $('#modalImageTitle').text(title);
+      $('#imageModal').modal('show');
+    });
+
+  } else {
+    $('#galleryTitle').text("Categoria não encontrada.");
+    $('#thumbnailContainer').html("<p class='text-center'>Nenhuma imagem encontrada para esta categoria.</p>");
+  }
+});
+</script>
+
+</body>
+</html>
