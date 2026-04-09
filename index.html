@@ -1,18 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .thumb-img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover; /* Faz as fotos ficarem do mesmo tamanho sem distorcer */
+      cursor: pointer;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .thumb-img:hover {
+      opacity: 0.7;
+    }
+    .panel-title a {
+      display: block;
+      text-decoration: none;
+    }
+    .modal-content {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    .close-modal {
+      color: white;
+      font-size: 30px;
+      opacity: 1;
+    }
+  </style>
 </head>
-<body style="background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;"></body>
+
+<body>
 
 <div class="container">
- <h2 style="font-weight: bold; font-family: 'Pacifico', cursive; color: #5D3C28; text-align: center; font-size: 50px;">Cestas com Alma</h2>
-<p style="color: #5D3C28; font-size: 18px;text-align: center;"><strong>Selecione uma categoria do seu interesse</strong></p>
+  <h2 style="font-weight: bold; font-family: 'Pacifico', cursive; color: #5D3C28; text-align: center; font-size: 50px; margin-top: 30px;">Cestas com Alma</h2>
+  <p style="color: #5D3C28; font-size: 18px; text-align: center; margin-bottom: 30px;"><strong>Selecione uma categoria do seu interesse</strong></p>
+
   <div class="panel-group" id="accordion">
+    
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -21,10 +61,18 @@
       </div>
       <div id="collapse1" class="panel-collapse collapse">
         <div class="panel-body">
-        	<img src="c1.jpeg" class="img-responsive">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <img src="c1.jpeg" class="thumb-img" onclick="abrirFoto(this.src)">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <img src="c2.jpeg" class="thumb-img" onclick="abrirFoto(this.src)">
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -33,84 +81,37 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
-        	<img src="c2.jpeg" class="img-responsive">
+          <div class="row">
+            <div class="col-xs-6 col-sm-4 col-md-3">
+              <img src="c2.jpeg" class="thumb-img" onclick="abrirFoto(this.src)">
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><strong>Dia as Mães</strong></a>
-        </h4>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c3.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><strong> Dia dos Namorados </strong></a>
-        </h4>
-      </div>
-      <div id="collapse4" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c4.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><strong> Aniversário </strong></a>
-        </h4>
-      </div>
-      <div id="collapse5" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c1.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><strong> Queijo e Vinho </strong></a>
-        </h4>
-      </div>
-      <div id="collapse6" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c1.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><strong> Frios </strong></a>
-        </h4>
-      </div>
-      <div id="collapse7" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c1.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse8"><strong> Produtos Artesanais</strong></a>
-        </h4>
-      </div>
-      <div id="collapse8" class="panel-collapse collapse">
-        <div class="panel-body">
-        	<img src="c1.jpeg" class="img-responsive">
-        </div>
-      </div>
-    </div>
-  </div> 
+
+    </div> 
 </div>
-    
+
+<div id="meuModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="border:none;">
+        <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" id="imgGrande" class="img-responsive" style="display: inline-block; border-radius: 10px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function abrirFoto(caminho) {
+    document.getElementById('imgGrande').src = caminho;
+    $('#meuModal').modal('show');
+  }
+</script>
+
 </body>
 </html>
