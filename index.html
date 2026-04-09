@@ -5,9 +5,28 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body { /* Estilo de fundo movido para cá */
+      background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    /* Estilo para tornar a área do título do painel totalmente clicável */
+    .panel-title a {
+        display: block;
+        padding: 10px 15px; /* Ajuste o padding conforme necessário */
+        text-decoration: none;
+        color: inherit;
+    }
+    .panel-title a:hover {
+        background-color: #f5f5f5; /* Cor de fundo ao passar o mouse */
+    }
+  </style>
 </head>
-<body style="background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;"></body>
+<body>
 
 <div class="container">
  <h2 style="font-weight: bold; font-family: 'Pacifico', cursive; color: #5D3C28; text-align: center; font-size: 50px;">Cestas com Alma</h2>
@@ -69,8 +88,37 @@
         </h4>
       </div>
     </div>
+
+    <!-- Novo Painel: Entre em Contato -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseContact"><strong> Entre em Contato </strong></a>
+        </h4>
+      </div>
+      <div id="collapseContact" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>Envie-nos uma mensagem via WhatsApp:</p>
+          <textarea id="whatsappMessage" class="form-control" rows="5" placeholder="Digite sua mensagem aqui..."></textarea>
+          <br>
+          <button class="btn btn-success btn-lg btn-block" onclick="sendWhatsAppMessage()">
+            <span class="glyphicon glyphicon-send"></span> Enviar Mensagem via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
   </div> 
 </div>
-    
+
+<script>
+  function sendWhatsAppMessage() {
+    // ATENÇÃO: Substitua '55XXYYYYZZZZZ' pelo seu número de WhatsApp completo (código do país + DDD + número).
+    // Exemplo para Brasil (55) com DDD 11 e número 987654321: '5511987654321'
+    const phoneNumber = "55179971446108";
+    const message = encodeURIComponent(document.getElementById('whatsappMessage').value);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  }
+</script>
 </body>
 </html>
