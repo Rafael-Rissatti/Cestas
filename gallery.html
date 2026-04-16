@@ -1,202 +1,285 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Galeria de Cestas</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <title>Galeria - Cestas com Alma</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #5D3C28;
+      --accent-color: #D4AF37;
+    }
+
     body {
-      background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8)), url('fundo1.png');
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.6)), url('fundo1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-color);
     }
-    .gallery-thumbnail {
-      width: 150px; /* Largura fixa para miniaturas */
-      height: 150px; /* Altura fixa para miniaturas */
-      object-fit: cover; /* Garante que a imagem cubra a área sem distorção */
-      cursor: pointer;
-      border: 1px solid #ddd;
-      padding: 5px;
-      margin: 10px;
-      transition: transform 0.2s;
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .gallery-thumbnail:hover {
-      transform: scale(1.05);
+
+    .nav-link {
+      color: var(--primary-color) !important;
+      font-weight: 600;
+      transition: color 0.3s;
     }
-    .gallery-container {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-color) !important;
     }
-    .modal-body img {
-      max-width: 100%;
-      height: auto;
-      display: block; /* Remove espaço extra abaixo da imagem */
-      margin: 0 auto; /* Centraliza a imagem no modal */
-    }
+
     .category-title {
-      font-weight: bold;
       font-family: 'Pacifico', cursive;
-      color: #5D3C28;
+      font-size: 3rem;
+      margin: 40px 0;
       text-align: center;
-      font-size: 40px;
-      margin-top: 20px;
-      margin-bottom: 30px;
     }
-    .back-button {
-      margin-top: 20px;
-      text-align: center;
+
+    /* Thumbnail Grid */
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding-bottom: 50px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Lightbox Modal */
+    .modal-content {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      border: none;
+    }
+
+    .modal-body img {
+      max-height: 70vh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+      color: var(--primary-color);
+    }
+
+    .modal-nav-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-prev { left: 10px; }
+    .btn-next { right: 10px; }
+
+    .btn-ask-whatsapp {
+      background-color: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 700;
+      margin-top: 15px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn-ask-whatsapp:hover {
+      background-color: #128C7E;
+      color: white;
+    }
+
+    @media (max-width: 576px) {
+      .gallery-container { grid-template-columns: repeat(2, 1fr); }
+      .category-title { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg sticky-top bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="index.html" style="font-family: 'Pacifico', cursive; color: var(--primary-color);">Cestas com Alma</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="gallery.html?category=cafe_da_manha" id="nav-cafe_da_manha">Café</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html?category=chocolate" id="nav-chocolate">Chocolate</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html?category=dia_das_maes" id="nav-dia_das_maes">Mães</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html?category=dia_dos_namorados" id="nav-dia_dos_namorados">Namorados</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html?category=aniversario" id="nav-aniversario">Aniversário</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
-  <div class="back-button">
-    <a href="index.html" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Voltar para Categorias</a>
-  </div>
-  <h2 class="category-title" id="galleryTitle"></h2>
-
+  <h2 class="category-title" id="galleryTitle">Galeria</h2>
+  
   <div class="gallery-container" id="thumbnailContainer">
-    <!-- As miniaturas serão carregadas aqui pelo JavaScript -->
+    <!-- Imagens carregadas via JS -->
   </div>
+</div>
 
-  <!-- Modal para exibição da imagem grande -->
-  <div id="imageModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="modalImageTitle"></h4>
-        </div>
-        <div class="modal-body text-center">
-          <img src="" id="largeImage" alt="Imagem Grande">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        </div>
+<!-- Lightbox Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="modalImageTitle" style="font-family: 'Playfair Display', serif;">Título da Cesta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body position-relative p-0">
+        <button class="modal-nav-btn btn-prev" id="prevBtn">&lt;</button>
+        <img src="" id="largeImage" class="img-fluid" alt="Imagem ampliada">
+        <button class="modal-nav-btn btn-next" id="nextBtn">&gt;</button>
+      </div>
+      <div class="modal-footer border-0 flex-column pb-4">
+        <p class="text-muted small mb-1">Gostou deste modelo?</p>
+        <a href="#" id="whatsappAction" target="_blank" class="btn-ask-whatsapp">
+          Solicitar pelo WhatsApp
+        </a>
       </div>
     </div>
   </div>
-
 </div>
+
+<!-- jQuery (opcional, mantido por compatibilidade com sua lógica, mas atualizado) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 $(document).ready(function() {
-  // Dados das imagens para cada categoria
-  // ATENÇÃO: Você precisará ter essas imagens nos seus diretórios ou ajustar os caminhos.
-  // Para fins de demonstração, algumas imagens são reutilizadas ou são placeholders.
   const categoryImages = {
-    cafe_da_manha: {
-      title: "Galeria de Café da Manhã",
-      images: [
-        { src: "c1.jpeg", alt: "Cesta de Café da Manhã 1" },
-        { src: "c4.jpeg", alt: "Cesta de Café da Manhã 2" }, // Exemplo: crie c1_2.jpeg, c1_3.jpeg
-        { src: "c5.jpeg", alt: "Cesta de Café da Manhã 3" }
-      ]
-    },
-    chocolate: {
-      title: "Galeria de Chocolate",
-      images: [
-        { src: "c2.jpeg", alt: "Cesta de Chocolate 1" },
-        { src: "c6.jpeg", alt: "Cesta de Chocolate 2" },
-        { src: "c8.jpeg", alt: "Cesta de Chocolate 4" },
-        { src: "c7.jpeg", alt: "Cesta de Chocolate 5" }
-      ]
-    },
-    dia_das_maes: {
-      title: "Galeria de Dia das Mães",
-      images: [
-        { src: "c3.jpeg", alt: "Cesta Dia das Mães 1" },
-        { src: "c8.jpeg", alt: "Cesta Dia das Mães 2" },
-        { src: "c1.jpeg", alt: "Cesta Dia das Mães 3" },
-        { src: "c2.jpeg", alt: "Cesta Dia das Mães 4" },
-        { src: "c7.jpeg", alt: "Cesta Dia das Mães 5" },
-        { src: "c3.jpeg", alt: "Cesta Dia das Mães 6" }
-      ]
-    },
-    dia_dos_namorados: {
-      title: "Galeria de Dia dos Namorados",
-      images: [
-        { src: "c4.jpeg", alt: "Cesta Dia dos Namorados 1" },
-        { src: "c3.jpeg", alt: "Cesta Dia dos Namorados 2" }, 
-        { src: "c8.jpeg", alt: "Cesta Dia dos Namorados 3" }
-        
-      ]
-    },
-    aniversario: {
-      title: "Galeria de Aniversário",
-      images: [
-        { src: "c1.jpeg", alt: "Cesta de Aniversário 1" },
-        { src: "c4.jpeg", alt: "Cesta de Aniversário 2" },
-        { src: "c4.jpeg", alt: "Cesta de Aniversário 2" }
-      ]
-    },
-    queijo_e_vinho: {
-      title: "Galeria de Queijo e Vinho",
-      images: [
-        { src: "c1.jpeg", alt: "Cesta de Queijo e Vinho 1" },
-        { src: "c2.jpeg", alt: "Cesta de Queijo e Vinho 2" }
-      ]
-    },
-    frios: {
-      title: "Galeria de Frios",
-      images: [
-        { src: "c1.jpeg", alt: "Cesta de Frios 1" },
-        { src: "c8.jpeg", alt: "Cesta de Frios 2" },
-        { src: "c7.jpeg", alt: "Cesta de Frios 3" }
-      ]
-    },
-    produtos_artesanais: {
-      title: "Galeria de Produtos Artesanais",
-      images: [
-        { src: "c8.jpeg", alt: "Cesta de Produtos Artesanais 1" },
-        { src: "c1.jpeg", alt: "Cesta de Produtos Artesanais 2" }
-      ]
-    }
+    cafe_da_manha: { title: "Café da Manhã", images: [
+      { src: "c1.jpeg", alt: "Cesta de Café Luxo" },
+      { src: "c4.jpeg", alt: "Cesta de Café Romântica" },
+      { src: "c5.jpeg", alt: "Cesta de Café Tradicional" }
+    ]},
+    chocolate: { title: "Chocolates", images: [
+      { src: "c2.jpeg", alt: "Cesta de Chocolates Premium" },
+      { src: "c6.jpeg", alt: "Cesta de Doces e Vinhos" },
+      { src: "c8.jpeg", alt: "Cesta de Bombons" }
+    ]},
+    dia_das_maes: { title: "Dia das Mães", images: [
+      { src: "c3.jpeg", alt: "Cesta de Mães Especial" },
+      { src: "c7.jpeg", alt: "Cesta de Mães Carinho" }
+    ]},
+    dia_dos_namorados: { title: "Namorados", images: [
+      { src: "c4.jpeg", alt: "Cesta Namorados Paixão" },
+      { src: "c3.jpeg", alt: "Cesta Namorados Delicada" }
+    ]},
+    aniversario: { title: "Aniversário", images: [
+      { src: "c5.jpeg", alt: "Cesta de Aniversário Festiva" },
+      { src: "c1.jpeg", alt: "Cesta de Aniversário Clássica" }
+    ]},
+    queijo_e_vinho: { title: "Queijo e Vinho", images: [
+      { src: "c6.jpeg", alt: "Cesta Queijos Finos" },
+      { src: "c2.jpeg", alt: "Cesta Vinho e Aperitivos" }
+    ]}
   };
 
-  // Função para obter parâmetros da URL
   const urlParams = new URLSearchParams(window.location.search);
-  const category = urlParams.get('category');
+  const category = urlParams.get('category') || 'cafe_da_manha';
   const galleryData = categoryImages[category];
+  let currentIndex = 0;
 
   if (galleryData) {
     $('#galleryTitle').text(galleryData.title);
-    const $thumbnailContainer = $('#thumbnailContainer');
-
-    galleryData.images.forEach(function(image) {
-      const $img = $('<img>')
-        .attr('src', image.src)
-        .attr('alt', image.alt)
-        .addClass('img-responsive gallery-thumbnail')
-        .data('large-src', image.src) // Armazena a URL da imagem grande
-        .data('title', image.alt); // Armazena o título para o modal
-
-      $thumbnailContainer.append($img);
+    $(`#nav-${category}`).addClass('active');
+    
+    const $container = $('#thumbnailContainer');
+    galleryData.images.forEach((img, index) => {
+      const item = $(`
+        <div class="gallery-item" data-index="${index}">
+          <img src="${img.src}" alt="${img.alt}">
+        </div>
+      `);
+      $container.append(item);
     });
 
-    // Lida com o clique na miniatura para abrir o modal
-    $thumbnailContainer.on('click', '.gallery-thumbnail', function() {
-      const largeSrc = $(this).data('large-src');
-      const title = $(this).data('title');
-      $('#largeImage').attr('src', largeSrc);
-      $('#modalImageTitle').text(title);
+    $('.gallery-item').on('click', function() {
+      currentIndex = $(this).data('index');
+      showImage(currentIndex);
       $('#imageModal').modal('show');
+    });
+
+    function showImage(index) {
+      const img = galleryData.images[index];
+      $('#largeImage').fadeOut(200, function() {
+        $(this).attr('src', img.src).fadeIn(200);
+      });
+      $('#modalImageTitle').text(img.alt);
+      
+      const phone = "5517997146108";
+      const msg = encodeURIComponent(`Olá! Vi no site e gostei muito da "${img.alt}". Poderia me dar mais detalhes sobre o que vem nela?`);
+      $('#whatsappAction').attr('href', `https://api.whatsapp.com/send?phone=${phone}&text=${msg}`);
+    }
+
+    $('#prevBtn').on('click', function() {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : galleryData.images.length - 1;
+      showImage(currentIndex);
+    });
+
+    $('#nextBtn').on('click', function() {
+      currentIndex = (currentIndex < galleryData.images.length - 1) ? currentIndex + 1 : 0;
+      showImage(currentIndex);
+    });
+
+    // Teclado para navegação
+    $(document).keydown(function(e) {
+      if ($('#imageModal').hasClass('show')) {
+        if (e.keyCode == 37) $('#prevBtn').click(); // Seta Esquerda
+        if (e.keyCode == 39) $('#nextBtn').click(); // Seta Direita
+      }
     });
 
   } else {
     $('#galleryTitle').text("Categoria não encontrada.");
-    $('#thumbnailContainer').html("<p class='text-center'>Nenhuma imagem encontrada para esta categoria.</p>");
   }
 });
 </script>
-
 </body>
 </html>
