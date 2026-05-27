@@ -3,7 +3,7 @@ from PIL import Image
 
 def optimize_images():
     base_dir = "E:\\Python\\Cestas\\Cestas"
-    categories = ["Cafe_da_Manha", "Cerveja"]
+    categories = ["Cafe_da_Manha", "Cerveja", "Chocolate"]
     root_images = ["c1.jpeg", "c2.jpeg", "c3.jpeg", "c4.jpeg", "c5.jpeg", "c6.jpeg", "c7.jpeg", "c8.jpeg", "fundo1.png", "fundo2.png"]
     
     thumb_size = (400, 400)

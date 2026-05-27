@@ -81,7 +81,10 @@
     }
 
     .modal-body img {
-      max-height: 70vh;
+      width: auto;
+      height: auto;
+      max-width: min(100%, 92vw);
+      max-height: 75vh;
       border-radius: 10px;
       object-fit: contain;
     }
@@ -146,9 +149,6 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="gallery.html?category=cafe_da_manha" id="nav-cafe_da_manha">Café</a></li>
         <li class="nav-item"><a class="nav-link" href="gallery.html?category=chocolate" id="nav-chocolate">Chocolate</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html?category=dia_das_maes" id="nav-dia_das_maes">Mães</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html?category=dia_dos_namorados" id="nav-dia_dos_namorados">Namorados</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html?category=aniversario" id="nav-aniversario">Aniversário</a></li>
         <li class="nav-item"><a class="nav-link" href="gallery.html?category=cervejas" id="nav-cervejas">Cervejas</a></li>
         <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
       </ul>
@@ -237,9 +237,34 @@ $(document).ready(function() {
       { src: "Cafe_da_Manha/Café da manhã (40).webp", thumb: "Cafe_da_Manha/thumbs/Café da manhã (40).webp", alt: "Cesta de Café da Manhã" },
       { src: "Cafe_da_Manha/Café da manhã (41).webp", thumb: "Cafe_da_Manha/thumbs/Café da manhã (41).webp", alt: "Cesta de Café da Manhã" }
     ]},
-    chocolate: { title: "Chocolates", images: [] },
-    dia_das_maes: { title: "Dia das Mães", images: [] },
-    dia_dos_namorados: { title: "Namorados", images: [] },
+    chocolate: { title: "Chocolates", images: [
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.18.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.18.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.19 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.19 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.19 (2).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.19 (2).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.19 (3).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.19 (3).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.19.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.19.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.20 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.20 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.20.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.20.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.21 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.21 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.21 (2).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.21 (2).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.21.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.21.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.22 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.22 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.22.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.22.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.23.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.23.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.24 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.24 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.24.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.24.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.25.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.25.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.26 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.26 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.26.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.26.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.27 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.27 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.27.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.27.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.28 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.28 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.28 (2).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.28 (2).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.28.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.28.jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.29 (1).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.29 (1).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.29 (2).jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.29 (2).jpg", alt: "Cesta de Chocolate" },
+      { src: "Chocolate/WhatsApp Image 2026-05-27 at 09.21.29.jpeg", thumb: "Chocolate/thumbs/WhatsApp Image 2026-05-27 at 09.21.29.jpg", alt: "Cesta de Chocolate" }
+    ]},
     cervejas: { title: "Cervejas", images: [
       { src: "Cerveja/cerveja (1).webp", thumb: "Cerveja/thumbs/cerveja (1).webp", alt: "Cesta de Cerveja" },
       { src: "Cerveja/cerveja (2).webp", thumb: "Cerveja/thumbs/cerveja (2).webp", alt: "Cesta de Cerveja" },
@@ -259,9 +284,7 @@ $(document).ready(function() {
       { src: "Cerveja/cerveja (16).webp", thumb: "Cerveja/thumbs/cerveja (16).webp", alt: "Cesta de Cerveja" },
       { src: "Cerveja/cerveja (17).webp", thumb: "Cerveja/thumbs/cerveja (17).webp", alt: "Cesta de Cerveja" },
       { src: "Cerveja/cerveja (18).webp", thumb: "Cerveja/thumbs/cerveja (18).webp", alt: "Cesta de Cerveja" }
-    ]},
-    aniversario: { title: "Aniversário", images: [] },
-    queijo_e_vinho: { title: "Queijo e Vinho", images: [] }
+    ]}
   };
 
   const urlParams = new URLSearchParams(window.location.search);
