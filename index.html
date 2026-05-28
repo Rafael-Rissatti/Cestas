@@ -170,7 +170,7 @@
     <h2 class="mb-4" style="font-family: 'Playfair Display', serif;">Dúvidas ou Personalização?</h2>
     <p class="mb-4">Se você não encontrou exatamente o que procura ou quer montar algo exclusivo, fale conosco!</p>
     <div class="col-lg-6 mx-auto">
-      <textarea id="whatsappMessage" class="form-control mb-3" rows="3" placeholder="Olá! Gostaria de saber mais sobre as cestas..."></textarea>
+      <textarea id="whatsappMessage" class="form-control mb-3" rows="3" placeholder="Olá! Vim pelo site e gostaria de informações sobre as cestas"></textarea>
       <button class="btn btn-whatsapp w-100" onclick="sendWhatsAppMessage()">
         Enviar Mensagem via WhatsApp
       </button>
@@ -182,7 +182,7 @@
 <script>
   function sendWhatsAppMessage() {
     const phoneNumber = "5517996470273";
-    const messageText = document.getElementById('whatsappMessage').value || "Olá! Vim pelo site e gostaria de tirar algumas dúvidas.";
+    const messageText = document.getElementById('whatsappMessage').value || "Olá! Vim pelo site e gostaria de informações sobre as cestas";
     const message = encodeURIComponent(messageText);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
     window.open(whatsappUrl, '_blank');
